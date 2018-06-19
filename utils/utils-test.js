@@ -19,3 +19,19 @@ describe('addAsync', () => {
     });
   });
 });
+
+// testing object updating
+describe('updateObj', () => {
+  it('should not modify the original object', () => {
+    const obj = {
+      name: 'Matus',
+      age: 200
+    };
+
+    const newObj = utils.updateObj(obj, 'gender', 'male');
+
+    expect(obj.name).toBe('Matus');
+    expect(obj.age).toBe(200);
+    expect(Object.keys(obj).length).toBe(2);
+  });
+});
