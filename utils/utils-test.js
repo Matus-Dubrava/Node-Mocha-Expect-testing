@@ -20,7 +20,7 @@ describe('addAsync', () => {
   });
 });
 
-// testing object updating
+// testing object update
 describe('updateObj', () => {
   it('should not modify the original object', () => {
     const obj = {
@@ -33,5 +33,33 @@ describe('updateObj', () => {
     expect(obj.name).toBe('Matus');
     expect(obj.age).toBe(200);
     expect(Object.keys(obj).length).toBe(2);
+  });
+
+  it(`should return new object with additional property if the property is not
+      already on the original object; remaining properties should stay unchanged`, () => {
+    const obj = {
+      name: 'Matus',
+      age: 200
+    };
+
+    const newObj = utils.updateObj(obj, 'gender', 'male');
+
+    expect(newObj.name).toBe('Matus');
+    expect(newObj.age).toBe(200);
+    expect(newObj.gender).toBe('male');
+    expect(Object.keys(newObj).length).toBe(3);
+  });
+
+  it(`should update property if it already exists on the original object`, () => {
+    const obj = {
+      name: 'Matus',
+      age: 200
+    };
+
+    const newObj = utils.updateObj(obj, 'name', 'Tim');
+
+    expect(newObj.name).toBe('Tim');
+    expect(newObj.age).toBe(200);
+    expect(Object.keys(newObj).length).toBe(2);
   });
 });
